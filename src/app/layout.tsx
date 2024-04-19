@@ -8,6 +8,7 @@ import { TopNav } from "./_components/topnav";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
 import { ourFileRouter } from "./api/uploadthing/core";
+import { Toaster } from "sonner";
 // import { Toaster } from "~/components/ui/sonner";
 // import { CSPostHogProvider } from "./_analytics/provider";
 
@@ -18,8 +19,6 @@ import { ourFileRouter } from "./api/uploadthing/core";
 // import { TopNav } from "./_components/topnav";
 // import { extractRouterConfig } from "uploadthing/server";
 // import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
-
-
 
 const inter = Inter({
   subsets: ["latin"],
@@ -32,18 +31,17 @@ export const metadata = {
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
-
 export default function RootLayout({
   children,
-  modal
+  modal,
 }: {
   children: React.ReactNode;
   modal: React.ReactNode;
 }) {
   return (
     <ClerkProvider>
-    <html lang="en">
-    <NextSSRPlugin
+      <html lang="en">
+        <NextSSRPlugin
           /**
            * The `extractRouterConfig` will extract **only** the route configs
            * from the router to prevent additional information from being
@@ -52,15 +50,16 @@ export default function RootLayout({
            */
           routerConfig={extractRouterConfig(ourFileRouter)}
         />
-      <body className={`font-sans ${inter.variable} dark` }>
-        <div className="h-screen grid grid-rows-[auto_1fr]">
-        <TopNav />
-        <main className="overflow-y-scroll">{children}</main>
-        </div>
-        {modal}
-        <div id="modal-root" />
+        <body className={`font-sans ${inter.variable} dark`}>
+          <div className="grid h-screen grid-rows-[auto_1fr]">
+            <TopNav />
+            <main className="overflow-y-scroll">{children}</main>
+          </div>
+          {modal}
+          <div id="modal-root" />
+          <Toaster />
         </body>
-    </html>
+      </html>
     </ClerkProvider>
   );
 }
