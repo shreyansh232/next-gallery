@@ -77,9 +77,8 @@ export default async function FullPageImageView(props: { id: number }) {
           <span>{new Date(image.createdAt).toLocaleDateString()}</span>
         </div>
 
-
         <div className="p-2">
-        <form
+          <form
             action={async () => {
               "use server";
 
