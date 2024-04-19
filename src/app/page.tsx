@@ -20,7 +20,7 @@ async function Images() {
 
   return(
   <div className="flex flex-wrap gap-4 justify-center p-4">
-  {[...images, ...images, ...images, ...images].map((image) => (
+  {images.map((image) => (
     <div key={image.id} className="flex w-48 flex-col">
       <Link href={`/img/${image.id}`}>
       <Image
